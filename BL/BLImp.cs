@@ -74,9 +74,11 @@ namespace BL
             //       let student = item as BO.Student
             //       orderby student.ID
             //       select student;
+
             return from item in dl.GetAllStudents()
                    select studentDoBoAdapter(item);
-        }
+          
+         }
         public IEnumerable<BO.Student> GetStudentsBy(Predicate<BO.Student> predicate)
         {
             throw new NotImplementedException();

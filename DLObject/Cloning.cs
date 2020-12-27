@@ -16,7 +16,19 @@ namespace DL
         //    //...
         //    return target;
         //}
-
+        internal static DO.Person Clown(this DO.Person original)
+        {
+            return new DO.Person
+            {
+                ID = original.ID,
+                Name = original.Name,
+                BirthDate = original.BirthDate,
+                PersonalStatus = original.PersonalStatus,
+                Street = original.Street,
+                HouseNumber = original.HouseNumber,
+                City = original.City
+            };
+        }
         //second way - With Bonus
         //cretae empty interface named IClonable in the DLAPI project
         //namespace DO

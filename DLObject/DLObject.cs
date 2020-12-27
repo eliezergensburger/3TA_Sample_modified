@@ -16,8 +16,10 @@ namespace DL
     {
         #region singelton
         static readonly DLObject instance = new DLObject();
+      
         static DLObject() { }// static ctor to ensure instance init is done just before first usage
         DLObject() { } // default => private
+      
         public static DLObject Instance { get => instance; }// The public Instance property to use
         #endregion
 
@@ -44,8 +46,23 @@ namespace DL
         public void AddPerson(DO.Person person)
         {
             if (DataSource.ListPersons.FirstOrDefault(p => p.ID == person.ID) != null)
+            {
                 throw new DO.BadPersonIdException(person.ID, "Duplicate person ID");
+            }
+
             DataSource.ListPersons.Add(person.Clone());
+            //DataSource.ListPersons.Add(person.Clown());
+            //DataSource.ListPersons.Add(new DO.Person
+            //{
+            //    BirthDate = person.BirthDate,
+            //    City = person.City,
+            //    HouseNumber = person.HouseNumber,
+            //    ID = person.ID,
+            //    Name = person.Name,
+            //    PersonalStatus = person.PersonalStatus,
+            //    Street = person.Street
+
+            //});
         }
 
         public void DeletePerson(int id)
@@ -80,8 +97,10 @@ namespace DL
                 throw new DO.BadPersonIdException(student.ID, "Duplicate student ID");
             if (DataSource.ListPersons.FirstOrDefault(p => p.ID == student.ID) == null)
                 throw new DO.BadPersonIdException(student.ID, "Missing person ID");
+        
             DataSource.ListStudents.Add(student.Clone());
         }
+
         public IEnumerable<DO.Student> GetAllStudents()
         {
             return from student in DataSource.ListStudents

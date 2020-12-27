@@ -10,7 +10,9 @@ namespace BLAPI
 {
     public interface IBL
     {
-        //Add Person to Course
+        #region Student
+        //Add Student to Course
+      
         //get all courses for student
         //etc...
         BO.Student GetStudent(int id);
@@ -18,5 +20,7 @@ namespace BLAPI
         IEnumerable<BO.ListedPerson> GetStudentIDNameList();
 
         IEnumerable<BO.Student> GetStudentsBy(Predicate<BO.Student> predicate);
+        #endregion Student
+
     }
 }
