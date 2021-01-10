@@ -4,6 +4,7 @@ using System.Linq;
 using DLAPI;
 using BLAPI;
 using System.Threading;
+using BO;
 
 namespace BL
 {
@@ -94,6 +95,32 @@ namespace BL
                    let student = item as BO.ListedPerson
                    //orderby student.ID
                    select student;
+        }
+
+        public int AddStudent(Student student )
+        {
+            var m = dl.GetAllPersons().FirstOrDefault(p => p.ID== student.ID);
+            if(m != null)
+            {
+                throw new BadStudentIdException("student id exists alraedy",new Exception());
+            }
+            
+            DO.Person person = new DO.Person
+            {
+                 ID = student.ID
+            };
+            dl.AddPerson(person);
+
+            DO.Student stu = new DO.Student
+            {
+                ID = student.ID,
+                Graduation = (DO.StudentGraduate)((int)student.Graduation),
+                StartYear = student.StartYear,
+                Status = (DO.StudentStatus)((int)student.Status),
+            };
+            dl.AddStudent(stu);
+         // TO DO
+            return 0;
         }
     }
 }

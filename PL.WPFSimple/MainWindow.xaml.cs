@@ -24,16 +24,12 @@ namespace PL.SimpleWPF
     public partial class MainWindow : Window
     {
         IBL bl = BLFactory.GetBL("1");
-        ObservableCollection<BO.Student> ObserListOfStudents = new ObservableCollection<BO.Student>();
+        ObservableCollection<BO.Student> ObserListOfStudents;
         public MainWindow()
         {
             InitializeComponent();
-
-            foreach (var item in bl.GetAllStudents())
-            {
-                ObserListOfStudents.Add(item);
-            }
-
+            ObserListOfStudents = new ObservableCollection<BO.Student>(bl.GetAllStudents());
+    
             graduationComboBox.ItemsSource = Enum.GetValues(typeof(BO.StudentGraduate));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(BO.StudentStatus));
             personalStatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.PersonalStatus));
@@ -50,6 +46,7 @@ namespace PL.SimpleWPF
 
         private void cbStudentID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             BO.Student curStu = (cbStudentID.SelectedItem as BO.Student);
             
             gridOneStudent.DataContext = curStu;
@@ -65,5 +62,26 @@ namespace PL.SimpleWPF
 
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddStudentWindow wnd = new AddStudentWindow();
+            bool? result = wnd.ShowDialog();
+            if(result == true)
+            {
+                PO.Student student = wnd.Student;
+                try
+                {
+                    bl.AddStudent(student.getStudentBO());
+                    ObserListOfStudents = null;
+                    ObserListOfStudents = new ObservableCollection<BO.Student>(bl.GetAllStudents());
+                    this.DataContext = ObserListOfStudents;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+        }
     }
 }

@@ -9,7 +9,11 @@ namespace DS
 {
     public static class DataSource
     {
-        public static List<Person> ListPersons;
+        private static List<Person> listPersons;
+
+        public static List<Person> ListPersons { get => listPersons; }
+      
+        
         public static List<Course> ListCourses;
         public static List<Student> ListStudents;
         public static List<Lecturer> ListLecturers;
@@ -22,7 +26,7 @@ namespace DS
         }
         static void InitAllLists()
         {
-            ListPersons = new List<Person>
+            listPersons = new List<Person>
             {
                 new Person
                 {

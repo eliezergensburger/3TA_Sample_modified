@@ -18,7 +18,7 @@ namespace BLAPI
         BO.Student GetStudent(int id);
         IEnumerable<BO.Student> GetAllStudents();
         IEnumerable<BO.ListedPerson> GetStudentIDNameList();
-
+        int AddStudent(BO.Student student);
         IEnumerable<BO.Student> GetStudentsBy(Predicate<BO.Student> predicate);
         #endregion Student
 

@@ -24,7 +24,33 @@ namespace PO
         //{
         //    ListOfCourses = new ObservableCollection<StudentCourse>();
         //}
- 
+       public  BO.Student getStudentBO()
+        {
+            var result = new BO.Student
+            {
+                ID = this.ID,
+                Name = this.Name,
+                BirthDate = this.BirthDate,
+                City = this.City,
+                Graduation = this.Graduation,
+                HouseNumber = this.HouseNumber,
+                PersonalStatus = this.PersonalStatus,
+                StartYear = this.StartYear,
+                Status = this.Status,
+                Street = this.Street
+            };
+            result.ListOfCourses = this.ListOfCourses.Select(sc =>
+            new BO.StudentCourse
+            {
+                Grade = sc.Grade,
+                Name = sc.Name,
+                Number = sc.Number,
+                ID = sc.ID,
+                Semester = sc.Semester,
+                Year = sc.Year
 
+            });
+            return result;
+        }
     }
 }

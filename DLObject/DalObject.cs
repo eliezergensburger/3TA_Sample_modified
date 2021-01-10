@@ -11,16 +11,16 @@ using DS;
 
 namespace DL
 {
-    sealed class DLObject : IDL    //internal
+    sealed class DalObject : IDL    //internal
 
     {
         #region singelton
-        static readonly DLObject instance = new DLObject();
+        static readonly DalObject instance = new DalObject();
       
-        static DLObject() { }// static ctor to ensure instance init is done just before first usage
-        DLObject() { } // default => private
+        static DalObject() { }// static ctor to ensure instance init is done just before first usage
+        DalObject() { } // default => private
       
-        public static DLObject Instance { get => instance; }// The public Instance property to use
+        public static DalObject Instance { get => instance; }// The public Instance property to use
         #endregion
 
         //Implement IDL methods, CRUD
