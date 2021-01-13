@@ -11,7 +11,7 @@ namespace DS
     {
         private static List<Person> listPersons;
 
-        public static List<Person> ListPersons { get => listPersons; }
+        public static List<Person> ListPersons { get => listPersons;  }
       
         
         public static List<Course> ListCourses;

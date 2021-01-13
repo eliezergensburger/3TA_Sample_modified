@@ -123,7 +123,20 @@ namespace DL_X
 
         public Student GetStudent(int id)
         {
-            throw new NotImplementedException();
+            XElement studentXml = (from item in DS.DataSourceXML.Students.Elements()
+                                  where int.Parse(item.Element("ID").Value) == id
+                                  select item).FirstOrDefault();
+            if(studentXml == null)
+            {
+                throw new DO.BadPersonIdException(id);
+            }
+
+            return new Student
+            {
+                ID = int.Parse(studentXml.Element("ID").Value),
+                BirthDate = DateTime.Parse(studentXml.Element("BirthDate").Value),
+
+            };
         }
 
         public IEnumerable<StudentInCourse> GetStudentInCourseList(Predicate<StudentInCourse> predicate)
