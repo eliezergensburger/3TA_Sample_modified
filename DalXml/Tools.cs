@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -20,6 +21,18 @@ namespace DL_X
                             new XElement("PersonalStatus", person.PersonalStatus.ToString()),
                             new XElement("Name", person.Name));
         }
+
+        public static XElement toXMLExam(this Exam exam)
+        {
+            return new XElement("Exam",
+                                new XElement("StudentID", exam.StudentID),
+                                new XElement("MivchanName", exam.MivchanName),
+                                new XElement("MivchanDate", XmlConvert.ToString(exam.MivchanStart, "yyyy-MM-dd")),
+                                new XElement("MivchanStartTime", XmlConvert.ToString(exam.MivchanStart, "HH: mm:ss")),
+                                new XElement("Duration", exam.Duration.TotalMinutes)
+                                );
+        }
+
         public static Student convertoStudent(this XElement element)
         {
             if (element.Element("Student") == null)

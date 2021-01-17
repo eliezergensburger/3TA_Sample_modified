@@ -34,6 +34,14 @@ namespace DL_X
 
         }
 
+        public void AddExam(Exam exam)
+        {
+            XElement element = exam.toXMLExam();
+            XElement root = DS.DataSourceXML.Exams;
+            root.Add(element);
+            DS.DataSourceXML.Save(root, "Exams");
+
+        }
         public void DeletePerson(int id)
         {
             throw new NotImplementedException();
@@ -156,6 +164,11 @@ namespace DL_X
                    select generate(studentXML.convertoStudent());
         }
 
+        public IEnumerable<object> GetStudentListWithSelectedFields(Func<DLAPI.DO.Student, object> generate)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdatePerson(Person person)
         {
             XElement rootPerson = DS.DataSourceXML.Persons;
@@ -178,6 +191,11 @@ namespace DL_X
         }
 
         public void UpdateStudent(int id, Action<Student> update)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Student> GetAllStudents()
         {
             throw new NotImplementedException();
         }

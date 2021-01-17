@@ -105,7 +105,8 @@ namespace DS
             }
         }
 
- 
+        public static XElement Exams { get; internal set; }
+
         private static XElement LoadData(string path)
         {
             XElement root;
